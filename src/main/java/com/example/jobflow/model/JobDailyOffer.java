@@ -30,4 +30,6 @@ public class JobDailyOffer {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
+    private String city;
+
 }
