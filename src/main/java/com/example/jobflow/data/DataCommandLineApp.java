@@ -6,6 +6,7 @@ import com.example.jobflow.model.Website;
 import com.example.jobflow.repository.JobDailyOfferRepository;
 import com.example.jobflow.repository.TagRepository;
 import com.example.jobflow.repository.WebsiteRepository;
+import com.example.jobflow.service.JobDailyOfferService;
 import com.example.jobflow.service.PracujPlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,6 +22,9 @@ public class DataCommandLineApp implements CommandLineRunner {
     private JobDailyOfferRepository jobDailyOfferRepository;
     @Autowired
     private PracujPlService pracujPlService;
+
+    @Autowired
+    private JobDailyOfferService jobDailyOfferService;
 
     public DataCommandLineApp(TagRepository tagRepository,
                               WebsiteRepository websiteRepository,
@@ -49,27 +53,13 @@ public class DataCommandLineApp implements CommandLineRunner {
                 tag = tagRepository.findByName(tagName).get();
             }
             for (String city: cities){
-                addJobDailyOffer(tag,website,city);
+               jobDailyOfferService.addJobDailyOffer(tag,website,city);
             }
 //            addJobDailyOffer(tag, website, "warszawa");
         }
     }
 
-    private void addJobDailyOffer(Tag tag, Website website, String city) {
-        try {
-            Integer numberOfOffers =
-                    pracujPlService.getNumberOfJobs(tag.getName(), city);
-            JobDailyOffer jobDailyOffer = new JobDailyOffer();
-            jobDailyOffer.setCity(city);
-            jobDailyOffer.setDate(LocalDate.now());
-            jobDailyOffer.setNumber(numberOfOffers);
-            jobDailyOffer.setTag(tag);
-            jobDailyOffer.setWebsite(website);
-            jobDailyOfferRepository.save(jobDailyOffer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }
 
 

@@ -1,8 +1,6 @@
 package com.example.jobflow.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +9,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@Data
+@AllArgsConstructor
+@Builder
 public class JobDailyOffer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
