@@ -48,8 +48,8 @@ public class DataCommandLineApp implements CommandLineRunner {
             } else {
                 tag = tagRepository.findByName(tagName).get();
             }
-            for (String c: cities){
-                addJobDailyOffer(tag,website,c);
+            for (String city: cities){
+                addJobDailyOffer(tag,website,city);
             }
 //            addJobDailyOffer(tag, website, "warszawa");
         }
