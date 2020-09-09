@@ -1,5 +1,7 @@
 package com.example.jobflow.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,8 +23,10 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonProperty("nazwa")
     private String name;
 
+    @JsonIgnore
     private String description;
 
     public Tag(String name) {
